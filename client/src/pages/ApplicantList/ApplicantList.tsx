@@ -9,6 +9,8 @@ import {
   Menu,
   MenuItem,
   Select,
+  Tab,
+  Tabs,
   Typography,
 } from "@mui/material";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
@@ -34,6 +36,7 @@ function ApplicantList() {
     positions[0]
   );
   const [status, setStatus] = useState<string>("open");
+  const [tab, setTab] = useState<number>(0);
 
   const handleDropDownClose = (position?: string) => {
     if (position) {
@@ -166,6 +169,7 @@ function ApplicantList() {
           </Button>
         </Box>
       </Box>
+
       <Box
         sx={{ display: "flex", ml: 8, mt: 1, alignItems: "center", gap: 0.5 }}
       >
@@ -222,6 +226,29 @@ function ApplicantList() {
         <Typography variant="body2" sx={{ textDecoration: "underline" }}>
           Bagus Fikri
         </Typography>
+      </Box>
+
+      <Box sx={{ mt: 2, borderBottom: 1, borderColor: "divider" }}>
+        <Tabs
+          value={tab}
+          onChange={(e: React.SyntheticEvent, val: number) => setTab(val)}
+          sx={{
+            "& .MuiTabs-indicator": {
+              backgroundColor: "#25272C",
+            },
+            "& .MuiTab-root.Mui-selected": {
+              color: "#25272C",
+            },
+          }}
+        >
+          <Tab label="Candidates" />
+          <Tab label="Job Info" />
+          <Tab label="Calendar" />
+          <Tab label="Score Card" />
+          <Tab label="Activity" />
+          <Tab label="Application Form" />
+          <Tab label="Automation" />
+        </Tabs>
       </Box>
     </Box>
   );
