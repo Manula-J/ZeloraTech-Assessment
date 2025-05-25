@@ -17,7 +17,8 @@ function Sidebar() {
   return (
     <Box
       sx={{
-        width: "60px",
+        maxWidth: "60px",
+        flex: 1,
         backgroundColor: "#FEFEFE",
         display: "flex",
         flexDirection: "column",

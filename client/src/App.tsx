@@ -2,6 +2,8 @@ import React from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
+import Toolbar from "./components/Toolbar";
+import ApplicantList from "./pages/ApplicantList/ApplicantList";
 
 function App() {
   return (
@@ -14,12 +16,20 @@ function App() {
 
       {/* Main content with sidebar */}
       <div style={{ display: "flex", flex: 1 }}>
-        {/* Sidebar */}
+        {/* Left Sidebar */}
         <Sidebar />
 
-        <main style={{ flex: 1, padding: "1rem", marginLeft: "60px" }}>
+        <main
+          style={{
+            flex: 1,
+            backgroundColor: "#F2F4F8",
+          }}
+        >
           {/* Page content */}
+          <ApplicantList />
         </main>
+
+        <Toolbar />
       </div>
     </div>
   );
