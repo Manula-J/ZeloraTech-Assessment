@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+.env
 
 # production
 /build
@@ -9,3 +10,4 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+/src/generated/prisma
