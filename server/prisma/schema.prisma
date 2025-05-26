@@ -6,7 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -59,7 +58,7 @@ model Candidate {
   positionId          Int
   applicationStage    String?
   overallScore        Float
-  isReffered          Boolean
+  refferalStatus      String
   assessmentStatus    String?
   createdAt           DateTime  @default(now())
 
