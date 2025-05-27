@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Avatar,
   Box,
@@ -13,6 +13,7 @@ import {
   Tabs,
   Typography,
 } from "@mui/material";
+import axios from "axios";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
@@ -31,6 +32,20 @@ import ToggleOnOutlinedIcon from "@mui/icons-material/ToggleOnOutlined";
 import SettingsSuggestOutlinedIcon from "@mui/icons-material/SettingsSuggestOutlined";
 import KanbanColumn from "./KanbanColumn";
 
+interface Candidate {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  telephone: string;
+  positionId: number;
+  applicationStage?: string;
+  overallScore: number;
+  assessmentStatus?: string;
+  createdAt: string;
+  refferalStatus: string;
+}
+
 const positions = [
   "Research and Development Officer",
   "Software Engineer",
@@ -44,6 +59,27 @@ function ApplicantList() {
   );
   const [status, setStatus] = useState<string>("open");
   const [tab, setTab] = useState<number>(0);
+  const [candidates, setCandidates] = useState<Candidate[]>([]);
+
+  useEffect(() => {
+    const fetchCandidates = async () => {
+      try {
+        const response = await axios.get<Candidate[]>(
+          "http://localhost:4000/candidate/get-candidates"
+        );
+        setCandidates(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error fetching candidates: ", error);
+      }
+    };
+
+    fetchCandidates();
+  }, []);
+
+  const getCandidatesByStage = (stage: string) => {
+    return candidates.filter((c) => c.applicationStage === stage);
+  };
 
   const handleDropDownClose = (position?: string) => {
     if (position) {
@@ -296,8 +332,22 @@ function ApplicantList() {
         <Box>sdfds</Box>
       </Box>
 
-      <Box sx={{ display: "flex", justifyContent: "space-between", mt: 3 }}>
-        <KanbanColumn title="Applying Period" users={["James", "Lisa"]} />
+      <Box
+        sx={{ display: "flex", justifyContent: "space-between", mt: 3, gap: 1 }}
+      >
+        <KanbanColumn
+          title="Applying Period"
+          candidates={getCandidatesByStage("Applying Period")}
+        />
+        <KanbanColumn
+          title="Screening"
+          candidates={getCandidatesByStage("Screening")}
+        />
+        <KanbanColumn
+          title="Interview"
+          candidates={getCandidatesByStage("Interview")}
+        />
+        <KanbanColumn title="Test" candidates={getCandidatesByStage("Test")} />
       </Box>
     </Box>
   );

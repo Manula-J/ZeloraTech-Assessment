@@ -7,7 +7,7 @@ import PersonAddAltOutlinedIcon from "@mui/icons-material/PersonAddAltOutlined";
 
 interface KanbanColumnProps {
   title: string;
-  users: string[];
+  candidates: Candidate[];
 }
 
 interface Candidate {
@@ -20,11 +20,11 @@ interface Candidate {
   applicationStage?: string;
   overallScore: number;
   assessmentStatus?: string;
-  createdAt: Date;
-  refferalStatus: string | null;
+  createdAt: string;
+  refferalStatus: string;
 }
 
-const KanbanColumn: React.FC<KanbanColumnProps> = ({ title, users }) => {
+const KanbanColumn: React.FC<KanbanColumnProps> = ({ title, candidates }) => {
   const titleColorMap: Record<string, string> = {
     "Applying Period": "#FD8400",
     Screening: "#BF6EC6",
@@ -32,40 +32,10 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({ title, users }) => {
     Test: "#4FCDC5",
   };
 
-  const candidates = [
-    {
-      id: 1,
-      firstName: "Ayesha",
-      lastName: "Fernando",
-      email: "ayesha.fernando@example.com",
-      telephone: "+94712345678",
-      positionId: 101, // Assume this matches a Position in your DB
-      applicationStage: "Applying Period",
-      overallScore: 85.5,
-      assessmentStatus: "Completed",
-      createdAt: "2025-05-10T10:00:00Z",
-      refferalStatus: "Referred",
-      // position and interviews would typically be handled through relations
-    },
-    {
-      id: 2,
-      firstName: "Tharindu",
-      lastName: "Perera",
-      email: "tharindu.perera@example.com",
-      telephone: "+94798765432",
-      positionId: 102, // Assume this matches another Position in your DB
-      applicationStage: "Interview",
-      overallScore: 78.2,
-      assessmentStatus: "Pending",
-      createdAt: "2025-05-12T14:30:00Z",
-      refferalStatus: null,
-    },
-  ];
-
   return (
     <Box
       sx={{
-        minWidth: 300,
+        minWidth: 280,
         maxWidth: 400,
         bgcolor: "#E8EBF0",
         borderRadius: 2,
@@ -92,7 +62,7 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({ title, users }) => {
             {title}
           </Typography>
           <Typography variant="subtitle2" sx={{ color: "#92969C" }}>
-            {users.length}
+            {candidates.length}
           </Typography>
         </Box>
         <Typography
@@ -110,7 +80,7 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({ title, users }) => {
       </Box>
 
       {candidates.map((candidate, index) => (
-        <Paper key={index} elevation={2} sx={{ my: 1, p: 1.5 }}>
+        <Paper key={index} elevation={2} sx={{ my: 1.5, p: 1.5 }}>
           <Box sx={{ display: "flex", gap: 1, alignItems: "center", mb: 1 }}>
             <Avatar
               src={undefined}
