@@ -48,8 +48,8 @@ export class CandidateController {
     try {
       const candidates = await candidateService.getAllCandidates();
 
-      if (!candidates) {
-        return res.status(404).json({ error: "Task not found" });
+      if (!candidates[0]) {
+        return res.status(404).json({ error: "No candidates not found" });
       }
 
       res.status(200).json(candidates);
@@ -74,7 +74,7 @@ export class CandidateController {
       const candidate = await candidateService.getCandidateById(candidateId);
 
       if (!candidate) {
-        return res.status(404).json({ error: "Task not found" });
+        return res.status(404).json({ error: "Candidate not found" });
       }
 
       res.status(200).json(candidate);
