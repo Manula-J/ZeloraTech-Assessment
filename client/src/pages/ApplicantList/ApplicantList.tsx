@@ -23,6 +23,13 @@ import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDown
 import SearchIcon from "@mui/icons-material/Search";
 import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import GroupOutlinedIcon from "@mui/icons-material/GroupOutlined";
+import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
+import AssignmentTurnedInOutlinedIcon from "@mui/icons-material/AssignmentTurnedInOutlined";
+import MonitorHeartOutlinedIcon from "@mui/icons-material/MonitorHeartOutlined";
+import ToggleOnOutlinedIcon from "@mui/icons-material/ToggleOnOutlined";
+import SettingsSuggestOutlinedIcon from "@mui/icons-material/SettingsSuggestOutlined";
+import KanbanColumn from "./KanbanColumn";
 
 const positions = [
   "Research and Development Officer",
@@ -228,27 +235,69 @@ function ApplicantList() {
         </Typography>
       </Box>
 
+      {/* Tab Menu */}
       <Box sx={{ mt: 2, borderBottom: 1, borderColor: "divider" }}>
         <Tabs
           value={tab}
           onChange={(e: React.SyntheticEvent, val: number) => setTab(val)}
           sx={{
+            mt: 4,
             "& .MuiTabs-indicator": {
               backgroundColor: "#25272C",
             },
             "& .MuiTab-root.Mui-selected": {
               color: "#25272C",
             },
+            "& .MuiTab-root": {
+              minHeight: "40px",
+            },
           }}
         >
-          <Tab label="Candidates" />
-          <Tab label="Job Info" />
-          <Tab label="Calendar" />
-          <Tab label="Score Card" />
-          <Tab label="Activity" />
-          <Tab label="Application Form" />
-          <Tab label="Automation" />
+          <Tab
+            icon={<GroupOutlinedIcon />}
+            label="Candidates"
+            iconPosition="start"
+          />
+          <Tab
+            icon={<WorkOutlineOutlinedIcon />}
+            label="Job Info"
+            iconPosition="start"
+          />
+          <Tab
+            icon={<CalendarTodayOutlinedIcon />}
+            label="Calendar"
+            iconPosition="start"
+          />
+          <Tab
+            icon={<AssignmentTurnedInOutlinedIcon />}
+            label="Score Card"
+            iconPosition="start"
+          />
+          <Tab
+            icon={<MonitorHeartOutlinedIcon />}
+            label="Activity"
+            iconPosition="start"
+          />
+          <Tab
+            icon={<ToggleOnOutlinedIcon />}
+            label="Application Form"
+            iconPosition="start"
+          />
+          <Tab
+            icon={<SettingsSuggestOutlinedIcon />}
+            label="Automation"
+            iconPosition="start"
+          />
         </Tabs>
+      </Box>
+
+      <Box sx={{ display: "flex", justifyContent: "space-between", mt: 3 }}>
+        <Box>sdf</Box>
+        <Box>sdfds</Box>
+      </Box>
+
+      <Box sx={{ display: "flex", justifyContent: "space-between", mt: 3 }}>
+        <KanbanColumn title="Applying Period" users={["James", "Lisa"]} />
       </Box>
     </Box>
   );
