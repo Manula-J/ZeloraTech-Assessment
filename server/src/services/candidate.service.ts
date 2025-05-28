@@ -32,8 +32,25 @@ export class CandidateService {
 
 
   // Retreives all the candidate records
-  async getAllCandidates() {
-    return await prisma.candidate.findMany();
+  async getAllCandidates(
+    applicationStage?: string,
+    page: number = 1,
+    limit: number = 10,
+    sortBy: string = "id",
+    order: string = "asc"
+  ) {
+    const whereClause = applicationStage ? { applicationStage } : {};
+    const skip = (page - 1) * limit;
+    const sortOrder = order.toLowerCase() === "desc" ? "desc" : "asc";
+
+    return await prisma.candidate.findMany({
+      where: whereClause,
+      orderBy: {
+        [sortBy]: sortOrder,
+      },
+      skip,
+      take: limit,
+    });
   }
 
 
@@ -51,6 +68,15 @@ export class CandidateService {
       where: { id },
       data,
     });
+  }
+
+
+  // Update candidate stage by id
+  async updateCandidateStage(id: number, newStage: string) {
+    return await prisma.candidate.update({
+      where: { id },
+      data: { applicationStage: newStage },
+    })
   }
 
 

@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { CandidateService } from "../services/candidate.service";
 
 const candidateService = new CandidateService();
+const allowedStages = ['Applying Period', 'Screening', 'Interview', 'Test'];
 
 export class CandidateController {
   
@@ -46,7 +47,19 @@ export class CandidateController {
   //@access   public
   static async getAllCandidates(req: Request, res: Response): Promise<any> {
     try {
-      const candidates = await candidateService.getAllCandidates();
+      const { applicationStage, page = "1", limit = "10", sortBy = "id", order = "asc" } = req.query;
+
+      if (applicationStage && !allowedStages.includes(applicationStage as string)) {
+        return res.status(400).json({ error: 'Invalid stage value' });
+      }
+
+      const candidates = await candidateService.getAllCandidates(
+        applicationStage as string,
+        parseInt(page as string),
+        parseInt(limit as string),
+        sortBy as string,
+        order as string
+      );
 
       if (!candidates[0]) {
         return res.status(404).json({ error: "No candidates not found" });
@@ -103,6 +116,27 @@ export class CandidateController {
       res.status(200).json({ message: 'Candidate updated', data: updated });
     } catch (error) {
       res.status(500).json({ error: 'Failed to update candidate', details: error });
+    }
+  }
+
+
+  //@desc     Update candidate stage by id
+  //@route    Patch /candidate/update-stage/:id
+  //@access   public
+  static async updateCandidateStage(req: Request, res: Response): Promise<any> {
+    try {
+      const { id } = req.params;
+      const { newStage } = req.body;
+
+      if (!allowedStages.includes(newStage)) {
+        return res.status(400).json({ error: 'Invalid stage value' });
+      }
+
+      const updateCandidate = await candidateService.updateCandidateStage(parseInt(id), newStage);
+
+      res.status(200).json(updateCandidate);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to update stage' });
     }
   }
 
