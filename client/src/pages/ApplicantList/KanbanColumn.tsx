@@ -129,7 +129,7 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({ title, candidates }) => {
               3.5 Overall
             </Button>
             <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-              {candidate.refferalStatus !== null && (
+              {candidate.refferalStatus === "Referred" && (
                 <Button
                   sx={{
                     textTransform: "none",

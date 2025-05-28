@@ -55,7 +55,6 @@ function App() {
             flex: 1,
             marginLeft: 60,
             marginRight: 60,
-            // overflowY: "auto",
           }}
         >
           <ApplicantList />
