@@ -19,7 +19,6 @@ function Sidebar() {
       sx={{
         maxWidth: "60px",
         height: `calc(100vh - 94px)`,
-        flex: 1,
         backgroundColor: "#FEFEFE",
         display: "flex",
         flexDirection: "column",
@@ -27,6 +26,7 @@ function Sidebar() {
         py: 2,
         gap: 2,
         justifyContent: "space-between",
+        borderRight: "2px solid #E6E8EB",
       }}
     >
       <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}>
@@ -99,7 +99,7 @@ function Sidebar() {
           </Badge>
         </IconButton>
 
-        <Divider variant="fullWidth" />
+        <Divider variant="fullWidth" sx={{ borderBottomWidth: "2px" }} />
 
         <IconButton sx={{ color: "#9B9EAB" }}>
           <PersonIcon />
@@ -108,7 +108,7 @@ function Sidebar() {
           <ScheduleIcon />
         </IconButton>
 
-        <Divider variant="fullWidth" />
+        <Divider variant="fullWidth" sx={{ borderBottomWidth: "2px" }} />
 
         <IconButton sx={{ color: "#9B9EAB" }}>
           <ShoppingBagIcon />
@@ -121,8 +121,15 @@ function Sidebar() {
         </IconButton>
       </Box>
 
-      <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}>
-        <Divider variant="fullWidth" />
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 0.5,
+          borderTop: "2px solid #E6E8EB",
+          pt: 0.5,
+        }}
+      >
         <IconButton sx={{ color: "#9B9EAB" }}>
           <SettingsIcon />
         </IconButton>

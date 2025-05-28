@@ -37,6 +37,7 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({ title, candidates }) => {
       sx={{
         minWidth: 280,
         maxWidth: 400,
+        height: "auto",
         bgcolor: "#E8EBF0",
         borderRadius: 2,
         p: 2,

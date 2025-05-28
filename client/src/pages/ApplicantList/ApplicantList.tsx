@@ -124,7 +124,7 @@ function ApplicantList() {
   };
 
   return (
-    <Box sx={{ p: "2rem" }}>
+    <Box sx={{ p: "2rem", backgroundColor: "#F2F4F8" }}>
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Box
           sx={{
@@ -175,7 +175,12 @@ function ApplicantList() {
               ))}
             </Menu>
 
-            <Divider orientation="vertical" variant="middle" flexItem />
+            <Divider
+              orientation="vertical"
+              variant="middle"
+              flexItem
+              sx={{ borderRightWidth: "2px" }}
+            />
 
             <IconButton
               onClick={handlePrevPosition}
@@ -217,7 +222,12 @@ function ApplicantList() {
             <MoreHorizIcon />
           </IconButton>
 
-          <Divider orientation="vertical" variant="middle" flexItem />
+          <Divider
+            orientation="vertical"
+            variant="middle"
+            flexItem
+            sx={{ borderRightWidth: "2px" }}
+          />
 
           <Button
             sx={{
@@ -513,6 +523,7 @@ function ApplicantList() {
         sx={{
           display: "grid",
           justifyContent: "space-between",
+          alignItems: "start",
           mt: 3,
           gap: 1,
           gridTemplateColumns: {

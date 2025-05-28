@@ -21,6 +21,7 @@ function Toolbar() {
         gridTemplateRows: "60px 1fr 60px",
         alignItems: "center",
         justifyItems: "center",
+        borderLeft: "2px solid #E6E8EB",
       }}
     >
       <IconButton sx={{ bgcolor: "transparent" }}>

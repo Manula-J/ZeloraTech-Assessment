@@ -17,7 +17,7 @@ import AddIcon from "@mui/icons-material/Add";
 
 function Navbar() {
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#1D1F2A" }}>
+    <AppBar position="static" sx={{ backgroundColor: "#1D1F2A", height: 64 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* Left section */}
@@ -38,14 +38,18 @@ function Navbar() {
                 orientation="vertical"
                 variant="middle"
                 flexItem
-                sx={{ borderColor: "#2E2F3C", borderWidth: 1.5 }}
+                sx={{
+                  borderColor: "#2E2F3C",
+                  borderRightWidth: "2px",
+                  display: { xs: "none", sm: "flex" },
+                }}
               />
               <Typography
                 variant="h6"
                 noWrap
                 sx={{
                   ml: 2,
-                  display: { xs: "none", md: "flex" },
+                  display: { xs: "none", sm: "flex" },
                   fontFamily: "monospace",
                   fontWeight: 700,
                   color: "inherit",
@@ -57,7 +61,7 @@ function Navbar() {
             </Box>
 
             {/* Middle section */}
-            <Box>
+            <Box sx={{ display: { xs: "none", md: "flex" } }}>
               <Stack spacing={2} direction="row">
                 <Button
                   sx={{
@@ -134,7 +138,7 @@ function Navbar() {
                 orientation="vertical"
                 variant="middle"
                 flexItem
-                sx={{ borderColor: "#2E2F3C", borderWidth: 1.5, mx: 2 }}
+                sx={{ borderColor: "#2E2F3C", borderRightWidth: "2px", mx: 2 }}
               />
 
               <Stack direction="row" spacing={2} sx={{ alignItems: "center" }}>

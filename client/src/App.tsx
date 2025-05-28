@@ -12,14 +12,40 @@ function App() {
       style={{ display: "flex", flexDirection: "column", height: "100vh" }}
     >
       {/* Top Navbar */}
-      <div style={{ flexShrink: 0 }}>
+      <div
+        style={{
+          height: 64,
+          flexShrink: 0,
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 10,
+        }}
+      >
         <Navbar />
       </div>
 
       {/* Main layout row: Sidebar + Main + Toolbar */}
-      <div style={{ display: "flex", flex: 1, minHeight: 0 }}>
+      <div
+        style={{
+          display: "flex",
+          flex: 1,
+          marginTop: 64,
+          height: "calc(100vh - 60px)",
+        }}
+      >
         {/* Left Sidebar */}
-        <div style={{ width: "60px", flexShrink: 0 }}>
+        <div
+          style={{
+            width: "60px",
+            position: "fixed",
+            top: 64,
+            bottom: 0,
+            left: 0,
+            zIndex: 10,
+          }}
+        >
           <Sidebar />
         </div>
 
@@ -27,15 +53,25 @@ function App() {
         <main
           style={{
             flex: 1,
-            backgroundColor: "#F2F4F8",
-            overflowY: "auto",
+            marginLeft: 60,
+            marginRight: 60,
+            // overflowY: "auto",
           }}
         >
           <ApplicantList />
         </main>
 
         {/* Right Toolbar */}
-        <div style={{ width: "60px", flexShrink: 0 }}>
+        <div
+          style={{
+            width: "60px",
+            position: "fixed",
+            top: 64,
+            bottom: 0,
+            right: 0,
+            zIndex: 10,
+          }}
+        >
           <Toolbar />
         </div>
       </div>
