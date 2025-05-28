@@ -125,13 +125,24 @@ function ApplicantList() {
 
   return (
     <Box sx={{ p: "2rem", backgroundColor: "#F2F4F8" }}>
-      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexWrap: "wrap",
+          rowGap: 1,
+        }}
+      >
+        {/* Heading left section */}
         <Box
           sx={{
             display: "flex",
             alignItems: "center",
             flexWrap: "wrap",
             gap: 3,
+            flexGrow: 1,
+            minWidth: 0,
           }}
         >
           <IconButton
@@ -144,7 +155,14 @@ function ApplicantList() {
             <KeyboardBackspaceIcon />
           </IconButton>
 
-          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+              flexShrink: 1,
+            }}
+          >
             <Typography
               sx={{
                 fontWeight: "bold",
@@ -155,7 +173,10 @@ function ApplicantList() {
               {selectedPosition}
             </Typography>
 
-            <IconButton onClick={(event) => setAnchorEl(event.currentTarget)}>
+            <IconButton
+              onClick={(event) => setAnchorEl(event.currentTarget)}
+              size="small"
+            >
               <KeyboardArrowDownIcon />
             </IconButton>
 
@@ -179,19 +200,29 @@ function ApplicantList() {
               orientation="vertical"
               variant="middle"
               flexItem
-              sx={{ borderRightWidth: "2px" }}
+              sx={{
+                borderRightWidth: "2px",
+              }}
             />
 
             <IconButton
               onClick={handlePrevPosition}
-              sx={{ bgcolor: "#FEFEFE", border: "1px solid #E9E9EB" }}
+              sx={{
+                bgcolor: "#FEFEFE",
+                border: "1px solid #E9E9EB",
+                display: { xs: "none", md: "flex" },
+              }}
             >
               <KeyboardArrowLeftIcon />
             </IconButton>
 
             <IconButton
               onClick={handleNextPosition}
-              sx={{ bgcolor: "#FEFEFE", border: "1px solid #E9E9EB" }}
+              sx={{
+                bgcolor: "#FEFEFE",
+                border: "1px solid #E9E9EB",
+                display: { xs: "none", md: "flex" },
+              }}
             >
               <KeyboardArrowRightIcon />
             </IconButton>
@@ -211,7 +242,11 @@ function ApplicantList() {
             </Typography>
           </Box>
         </Box>
-        <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
+
+        {/* Heading right section */}
+        <Box
+          sx={{ display: "flex", alignItems: "center", gap: 3, flexShrink: 1 }}
+        >
           <IconButton
             sx={{
               bgcolor: "#FEFEFE",
@@ -238,16 +273,31 @@ function ApplicantList() {
               gap: 0.5,
               alignItems: "center",
               borderRadius: 2,
+              fontSize: { xs: "0.75rem", sm: "0.875rem" },
+              minWidth: { sm: 40, md: 100 },
+              px: { sm: 0, md: 2 },
             }}
           >
             <ShareOutlinedIcon sx={{ fontSize: "1.125rem" }} />
-            <Typography variant="subtitle2">Share & Promote</Typography>
+            <Typography
+              variant="subtitle2"
+              sx={{ display: { xs: "none", md: "inline" } }}
+            >
+              Share & Promote
+            </Typography>
           </Button>
         </Box>
       </Box>
 
+      {/* Position Details */}
       <Box
-        sx={{ display: "flex", ml: 8, mt: 1, alignItems: "center", gap: 0.5 }}
+        sx={{
+          display: "flex",
+          ml: { xs: 0, md: 8 },
+          mt: 1,
+          alignItems: "center",
+          gap: 0.5,
+        }}
       >
         <FormControl size="small">
           <Select
@@ -305,10 +355,24 @@ function ApplicantList() {
       </Box>
 
       {/* Tab Menu */}
-      <Box sx={{ mt: 2, borderBottom: 1, borderColor: "divider" }}>
+      <Box
+        sx={{
+          mt: 2,
+          borderBottom: 1,
+          borderColor: "divider",
+          width: {
+            xs: "30%",
+            sm: "50%",
+            md: "75%",
+            lg: "100%",
+          },
+        }}
+      >
         <Tabs
           value={tab}
           onChange={(e: React.SyntheticEvent, val: number) => setTab(val)}
+          variant="scrollable"
+          scrollButtons="auto"
           sx={{
             mt: 4,
             "& .MuiTabs-indicator": {
@@ -395,6 +459,7 @@ function ApplicantList() {
               bgcolor: "#E8EBF0",
               color: "#1B1D22",
               alignItems: "center",
+              display: { xs: "none", sm: "flex" },
             }}
           >
             <CalendarTodayIcon sx={{ fontSize: 15, mr: 1, color: "#999EB0" }} />
@@ -418,6 +483,7 @@ function ApplicantList() {
               bgcolor: "#E8EBF0",
               color: "#1B1D22",
               alignItems: "center",
+              display: { xs: "none", md: "flex" },
             }}
           >
             <AssignmentTurnedInIcon
@@ -443,6 +509,7 @@ function ApplicantList() {
               bgcolor: "#E8EBF0",
               color: "#1B1D22",
               alignItems: "center",
+              display: { xs: "none", lg: "flex" },
             }}
           >
             <FilterAltIcon sx={{ fontSize: 15, mr: 1, color: "#999EB0" }} />
@@ -460,7 +527,9 @@ function ApplicantList() {
         <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
           <Button
             sx={{
-              width: 130,
+              minWidth: 40,
+              width: { md: 40, lg: 130 },
+              px: { md: 0, lg: 8 },
               height: 38,
               fontSize: 15,
               textTransform: "none",
@@ -470,12 +539,21 @@ function ApplicantList() {
               "&:hover": {
                 backgroundColor: "#E8EBF0",
               },
+              gap: 1,
             }}
           >
             <PersonAddAltOutlinedIcon
-              sx={{ fontSize: 15, mr: 1, color: "#252525" }}
+              sx={{ fontSize: 15, mr: 1, color: "#252525", m: 0 }}
             />
-            Refer People
+            <Typography
+              sx={{
+                display: { sm: "none", lg: "flex" },
+                fontSize: 15,
+                whiteSpace: "nowrap",
+              }}
+            >
+              Refer People
+            </Typography>
           </Button>
 
           <IconButton
