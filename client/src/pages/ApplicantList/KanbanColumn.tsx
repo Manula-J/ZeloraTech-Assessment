@@ -5,11 +5,13 @@ import StarIcon from "@mui/icons-material/Star";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import PersonAddAltOutlinedIcon from "@mui/icons-material/PersonAddAltOutlined";
 
+// Interface for props passed
 interface KanbanColumnProps {
   title: string;
   candidates: Candidate[];
 }
 
+// Interface defining the shape of a Candidate object
 interface Candidate {
   id: number;
   firstName: string;
@@ -25,6 +27,7 @@ interface Candidate {
 }
 
 const KanbanColumn: React.FC<KanbanColumnProps> = ({ title, candidates }) => {
+  // Map to assign specific colors to each column title
   const titleColorMap: Record<string, string> = {
     "Applying Period": "#FD8400",
     Screening: "#BF6EC6",
@@ -43,6 +46,7 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({ title, candidates }) => {
         p: 2,
       }}
     >
+      {/* Column header */}
       <Box
         sx={{
           display: "flex",
@@ -80,8 +84,10 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({ title, candidates }) => {
         </Typography>
       </Box>
 
+      {/* Each candidate information displayed */}
       {candidates.map((candidate, index) => (
         <Paper key={index} elevation={2} sx={{ my: 1.5, p: 1.5 }}>
+          {/* Top section with candidate avatar and basic info */}
           <Box sx={{ display: "flex", gap: 1, alignItems: "center", mb: 1 }}>
             <Avatar
               src={undefined}
@@ -110,8 +116,10 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({ title, candidates }) => {
             </Box>
           </Box>
 
+          {/* Divider between candidate info and actions */}
           <Divider sx={{ mb: 1.5 }} />
 
+          {/* Bottom section with overall score and referral status */}
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Button
               sx={{

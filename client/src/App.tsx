@@ -11,7 +11,7 @@ function App() {
       className="App"
       style={{ display: "flex", flexDirection: "column", height: "100vh" }}
     >
-      {/* Top Navbar */}
+      {/* Top Navbar - fixed */}
       <div
         style={{
           height: 64,
@@ -35,7 +35,7 @@ function App() {
           height: "calc(100vh - 60px)",
         }}
       >
-        {/* Left Sidebar */}
+        {/* Left Sidebar - fixed */}
         <div
           style={{
             width: "60px",
@@ -49,7 +49,7 @@ function App() {
           <Sidebar />
         </div>
 
-        {/* Main Content - scrolls */}
+        {/* Main Content - scrollable */}
         <main
           style={{
             flex: 1,
@@ -60,7 +60,7 @@ function App() {
           <ApplicantList />
         </main>
 
-        {/* Right Toolbar */}
+        {/* Right Toolbar - fixed */}
         <div
           style={{
             width: "60px",

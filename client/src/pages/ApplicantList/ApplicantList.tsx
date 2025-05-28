@@ -13,7 +13,6 @@ import {
   Select,
   Tab,
   Tabs,
-  TextField,
   Typography,
 } from "@mui/material";
 import dayjs, { Dayjs } from "dayjs";
@@ -64,21 +63,33 @@ const positions = [
 ];
 
 function ApplicantList() {
+  // State to manage dropdown anchor element for position selection
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  // State to track currently selected job position
   const [selectedPosition, setSelectedPosition] = useState<string>(
     positions[0]
   );
+
+  // State to track the status filter (e.g., "open", "closed")
   const [status, setStatus] = useState<string>("open");
+
+  // State to manage the currently selected tab index
   const [tab, setTab] = useState<number>(0);
+
+  // State to store user input from the search field
   const [query, setQuery] = useState<string>("");
-  // const [dateRange, setDateRange] = useState<Date>();
+
+  // State to store the selected date range for filtering candidates
   const [dateRange, setDateRange] = useState<DateRange<Dayjs>>([
     dayjs("2025-05-01"),
     dayjs("2025-05-28"),
   ]);
 
+  // State to store the list of candidates fetched from the backend
   const [candidates, setCandidates] = useState<Candidate[]>([]);
 
+  // Fetch candidate data from the backend when the component mounts
   useEffect(() => {
     const fetchCandidates = async () => {
       try {
@@ -95,15 +106,18 @@ function ApplicantList() {
     fetchCandidates();
   }, []);
 
+  // Helper function to filter candidates by their application stage
   const getCandidatesByStage = (stage: string) => {
     return candidates.filter((c) => c.applicationStage === stage);
   };
 
+  // Event handler to update the search query when user types in search field
   const handleSearch = (e: any) => {
     const value = e.target.value;
     setQuery(value);
   };
 
+  // Handler to close the dropdown and optionally update the selected position
   const handleDropDownClose = (position?: string) => {
     if (position) {
       setSelectedPosition(position);
@@ -111,12 +125,14 @@ function ApplicantList() {
     setAnchorEl(null);
   };
 
+  // Navigate to the previous position in the positions list
   const handlePrevPosition = () => {
     if (positions.indexOf(selectedPosition) > 0) {
       setSelectedPosition(positions[positions.indexOf(selectedPosition) - 1]);
     }
   };
 
+  // Navigate to the next position in the positions list
   const handleNextPosition = () => {
     if (positions.indexOf(selectedPosition) < positions.length - 1) {
       setSelectedPosition(positions[positions.indexOf(selectedPosition) + 1]);
@@ -125,6 +141,7 @@ function ApplicantList() {
 
   return (
     <Box sx={{ p: "2rem", backgroundColor: "#F2F4F8" }}>
+      {/* Header section */}
       <Box
         sx={{
           display: "flex",
@@ -134,7 +151,7 @@ function ApplicantList() {
           rowGap: 1,
         }}
       >
-        {/* Heading left section */}
+        {/* Header left section */}
         <Box
           sx={{
             display: "flex",
@@ -243,7 +260,7 @@ function ApplicantList() {
           </Box>
         </Box>
 
-        {/* Heading right section */}
+        {/* Header right section */}
         <Box
           sx={{ display: "flex", alignItems: "center", gap: 3, flexShrink: 1 }}
         >
@@ -289,7 +306,7 @@ function ApplicantList() {
         </Box>
       </Box>
 
-      {/* Position Details */}
+      {/* Position details section */}
       <Box
         sx={{
           display: "flex",
@@ -354,7 +371,7 @@ function ApplicantList() {
         </Typography>
       </Box>
 
-      {/* Tab Menu */}
+      {/* Tab menu section */}
       <Box
         sx={{
           mt: 2,
@@ -425,8 +442,9 @@ function ApplicantList() {
         </Tabs>
       </Box>
 
-      {/* Filter bar */}
+      {/* Filter options section */}
       <Box sx={{ display: "flex", justifyContent: "space-between", mt: 3 }}>
+        {/* Fileter options left section */}
         <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
           <Paper
             component="form"
@@ -524,6 +542,8 @@ function ApplicantList() {
             />
           </Button>
         </Box>
+
+        {/* Filter options right section */}
         <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
           <Button
             sx={{
@@ -597,6 +617,7 @@ function ApplicantList() {
         </Box>
       </Box>
 
+      {/* Kanban style column layout of candidates */}
       <Box
         sx={{
           display: "grid",

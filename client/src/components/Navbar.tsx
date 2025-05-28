@@ -20,13 +20,13 @@ function Navbar() {
     <AppBar position="static" sx={{ backgroundColor: "#1D1F2A", height: 64 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* Left section */}
           <Box
             display="flex"
             alignItems="center"
             justifyContent="space-between"
             sx={{ width: "100%" }}
           >
+            {/* Left Section - Logo and Title */}
             <Box display="flex">
               <Box
                 component="img"
@@ -60,7 +60,7 @@ function Navbar() {
               </Typography>
             </Box>
 
-            {/* Middle section */}
+            {/* Middle section - Navigation Buttons */}
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
               <Stack spacing={2} direction="row">
                 <Button
@@ -119,7 +119,7 @@ function Navbar() {
               </Stack>
             </Box>
 
-            {/* Right side items */}
+            {/* Right section - User profile controls */}
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <Button
                 aria-label="search"
