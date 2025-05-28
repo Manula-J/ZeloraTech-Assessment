@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Divider, IconButton, Typography } from "@mui/material";
+import { Badge, Box, Divider, IconButton, Typography } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import AnnouncementIcon from "@mui/icons-material/Announcement";
@@ -18,6 +18,7 @@ function Sidebar() {
     <Box
       sx={{
         maxWidth: "60px",
+        height: `calc(100vh - 94px)`,
         flex: 1,
         backgroundColor: "#FEFEFE",
         display: "flex",
@@ -82,7 +83,20 @@ function Sidebar() {
         <IconButton
           sx={{ color: "#303B49", bgcolor: "#ECF2F6", borderRadius: 2 }}
         >
-          <AccountCircleIcon />
+          <Badge
+            badgeContent={4}
+            variant="dot"
+            sx={{
+              "& .MuiBadge-badge": {
+                backgroundColor: "#DF4D13",
+                right: 4,
+                top: 18,
+              },
+              borderRadius: 2,
+            }}
+          >
+            <AccountCircleIcon />
+          </Badge>
         </IconButton>
 
         <Divider variant="fullWidth" />
@@ -115,7 +129,15 @@ function Sidebar() {
         <IconButton sx={{ color: "#9B9EAB" }}>
           <AnnouncementIcon />
         </IconButton>
-        <IconButton sx={{ color: "#FEFEFE", backgroundColor: "#1D1F2A" }}>
+        <IconButton
+          sx={{
+            color: "#FEFEFE",
+            backgroundColor: "#1D1F2A",
+            "&:hover": {
+              backgroundColor: "#686A6E",
+            },
+          }}
+        >
           <QuestionMarkIcon />
         </IconButton>
       </Box>

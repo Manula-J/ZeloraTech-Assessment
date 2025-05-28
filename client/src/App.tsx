@@ -12,24 +12,32 @@ function App() {
       style={{ display: "flex", flexDirection: "column", height: "100vh" }}
     >
       {/* Top Navbar */}
-      <Navbar />
+      <div style={{ flexShrink: 0 }}>
+        <Navbar />
+      </div>
 
-      {/* Main content with sidebar */}
-      <div style={{ display: "flex", flex: 1 }}>
+      {/* Main layout row: Sidebar + Main + Toolbar */}
+      <div style={{ display: "flex", flex: 1, minHeight: 0 }}>
         {/* Left Sidebar */}
-        <Sidebar />
+        <div style={{ width: "60px", flexShrink: 0 }}>
+          <Sidebar />
+        </div>
 
+        {/* Main Content - scrolls */}
         <main
           style={{
             flex: 1,
             backgroundColor: "#F2F4F8",
+            overflowY: "auto",
           }}
         >
-          {/* Page content */}
           <ApplicantList />
         </main>
 
-        <Toolbar />
+        {/* Right Toolbar */}
+        <div style={{ width: "60px", flexShrink: 0 }}>
+          <Toolbar />
+        </div>
       </div>
     </div>
   );

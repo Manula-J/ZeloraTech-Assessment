@@ -6,13 +6,18 @@ import {
   Divider,
   FormControl,
   IconButton,
+  InputBase,
   Menu,
   MenuItem,
+  Paper,
   Select,
   Tab,
   Tabs,
+  TextField,
   Typography,
 } from "@mui/material";
+import dayjs, { Dayjs } from "dayjs";
+import { DateRange } from "@mui/x-date-pickers-pro/models";
 import axios from "axios";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -31,6 +36,12 @@ import MonitorHeartOutlinedIcon from "@mui/icons-material/MonitorHeartOutlined";
 import ToggleOnOutlinedIcon from "@mui/icons-material/ToggleOnOutlined";
 import SettingsSuggestOutlinedIcon from "@mui/icons-material/SettingsSuggestOutlined";
 import KanbanColumn from "./KanbanColumn";
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
+import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import ViewKanbanOutlinedIcon from "@mui/icons-material/ViewKanbanOutlined";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import PersonAddAltOutlinedIcon from "@mui/icons-material/PersonAddAltOutlined";
 
 interface Candidate {
   id: number;
@@ -59,6 +70,13 @@ function ApplicantList() {
   );
   const [status, setStatus] = useState<string>("open");
   const [tab, setTab] = useState<number>(0);
+  const [query, setQuery] = useState<string>("");
+  // const [dateRange, setDateRange] = useState<Date>();
+  const [dateRange, setDateRange] = useState<DateRange<Dayjs>>([
+    dayjs("2025-05-01"),
+    dayjs("2025-05-28"),
+  ]);
+
   const [candidates, setCandidates] = useState<Candidate[]>([]);
 
   useEffect(() => {
@@ -79,6 +97,11 @@ function ApplicantList() {
 
   const getCandidatesByStage = (stage: string) => {
     return candidates.filter((c) => c.applicationStage === stage);
+  };
+
+  const handleSearch = (e: any) => {
+    const value = e.target.value;
+    setQuery(value);
   };
 
   const handleDropDownClose = (position?: string) => {
@@ -248,7 +271,7 @@ function ApplicantList() {
         <Typography variant="body2">
           •{" "}
           <WorkOutlineOutlinedIcon
-            sx={{ fontSize: 16, verticalAlign: "middle" }}
+            sx={{ fontSize: 16, verticalAlign: "middle", color: "#B4B6BC" }}
           />{" "}
           Onsite
         </Typography>
@@ -256,7 +279,7 @@ function ApplicantList() {
         <Typography variant="body2">
           •{" "}
           <PersonOutlineOutlinedIcon
-            sx={{ fontSize: 16, verticalAlign: "middle" }}
+            sx={{ fontSize: 16, verticalAlign: "middle", color: "#B4B6BC" }}
           />{" "}
           Created by
         </Typography>
@@ -286,6 +309,7 @@ function ApplicantList() {
             },
             "& .MuiTab-root": {
               minHeight: "40px",
+              color: "#7E8084",
             },
           }}
         >
@@ -327,13 +351,176 @@ function ApplicantList() {
         </Tabs>
       </Box>
 
+      {/* Filter bar */}
       <Box sx={{ display: "flex", justifyContent: "space-between", mt: 3 }}>
-        <Box>sdf</Box>
-        <Box>sdfds</Box>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
+          <Paper
+            component="form"
+            elevation={0}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              width: 200,
+              height: 38,
+              borderRadius: "8px",
+              border: "1px solid #EBEDEF",
+            }}
+          >
+            <IconButton sx={{ p: "5px" }} aria-label="search">
+              <SearchIcon />
+            </IconButton>
+            <InputBase
+              sx={{ ml: 1, flex: 1 }}
+              placeholder="Search"
+              inputProps={{ "aria-label": "search" }}
+            />
+          </Paper>
+
+          <Button
+            sx={{
+              width: 160,
+              height: 38,
+              fontSize: 15,
+              textTransform: "none",
+              bgcolor: "#E8EBF0",
+              color: "#1B1D22",
+              alignItems: "center",
+            }}
+          >
+            <CalendarTodayIcon sx={{ fontSize: 15, mr: 1, color: "#999EB0" }} />
+            Date Range
+            <KeyboardArrowDownIcon
+              sx={{
+                color: "#A8A8AC",
+                bgcolor: "#FEFEFE",
+                borderRadius: 1,
+                ml: 1,
+              }}
+            />
+          </Button>
+
+          <Button
+            sx={{
+              width: 160,
+              height: 38,
+              fontSize: 15,
+              textTransform: "none",
+              bgcolor: "#E8EBF0",
+              color: "#1B1D22",
+              alignItems: "center",
+            }}
+          >
+            <AssignmentTurnedInIcon
+              sx={{ fontSize: 15, mr: 1, color: "#999EB0" }}
+            />
+            Score Range
+            <KeyboardArrowDownIcon
+              sx={{
+                color: "#A8A8AC",
+                bgcolor: "#FEFEFE",
+                borderRadius: 1,
+                ml: 1,
+              }}
+            />
+          </Button>
+
+          <Button
+            sx={{
+              width: 190,
+              height: 38,
+              fontSize: 15,
+              textTransform: "none",
+              bgcolor: "#E8EBF0",
+              color: "#1B1D22",
+              alignItems: "center",
+            }}
+          >
+            <FilterAltIcon sx={{ fontSize: 15, mr: 1, color: "#999EB0" }} />
+            Advanced Filter
+            <KeyboardArrowDownIcon
+              sx={{
+                color: "#A8A8AC",
+                bgcolor: "#FEFEFE",
+                borderRadius: 1,
+                ml: 1,
+              }}
+            />
+          </Button>
+        </Box>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
+          <Button
+            sx={{
+              width: 130,
+              height: 38,
+              fontSize: 15,
+              textTransform: "none",
+              bgcolor: "transparent",
+              color: "#1B1D22",
+              alignItems: "center",
+              "&:hover": {
+                backgroundColor: "#E8EBF0",
+              },
+            }}
+          >
+            <PersonAddAltOutlinedIcon
+              sx={{ fontSize: 15, mr: 1, color: "#252525" }}
+            />
+            Refer People
+          </Button>
+
+          <IconButton
+            sx={{
+              width: 38,
+              height: 38,
+              bgcolor: "#FEFEFE",
+              border: "1px solid #E9E9EB",
+              borderRadius: 2,
+            }}
+          >
+            <SettingsOutlinedIcon />
+          </IconButton>
+
+          <Divider orientation="vertical" variant="middle" flexItem />
+
+          <Button
+            sx={{
+              width: 130,
+              height: 38,
+              fontSize: 15,
+              textTransform: "none",
+              bgcolor: "#E8EBF0",
+              color: "#1B1D22",
+              alignItems: "center",
+            }}
+          >
+            <ViewKanbanOutlinedIcon
+              sx={{ fontSize: 15, mr: 1, color: "#999EB0" }}
+            />
+            Kanban
+            <KeyboardArrowDownIcon
+              sx={{
+                color: "#A8A8AC",
+                bgcolor: "#FEFEFE",
+                borderRadius: 1,
+                ml: 1,
+              }}
+            />
+          </Button>
+        </Box>
       </Box>
 
       <Box
-        sx={{ display: "flex", justifyContent: "space-between", mt: 3, gap: 1 }}
+        sx={{
+          display: "grid",
+          justifyContent: "space-between",
+          mt: 3,
+          gap: 1,
+          gridTemplateColumns: {
+            sm: "repeat(1, 1fr)",
+            md: "repeat(2, 1fr)",
+            lg: "repeat(4, 1fr)",
+          },
+        }}
       >
         <KanbanColumn
           title="Applying Period"
