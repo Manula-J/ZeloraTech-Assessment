@@ -3,6 +3,8 @@ import { PrismaClient } from '@prisma/client';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import CandidateRouter from './routes/candidate.route';
+import PositionRouter from './routes/position.route';
+
 
 // Loading environment variables to process.env
 dotenv.config();
@@ -21,6 +23,9 @@ app.use(cors({
 
 // Mount candidate related routes
 app.use('/candidate', CandidateRouter);
+
+// Mount position related routes
+app.use('/position', PositionRouter);
 
 // Start the server on the port 4000
 const PORT = process.env.PORT || 4000;
