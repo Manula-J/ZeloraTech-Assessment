@@ -37,6 +37,7 @@ export class CandidateController {
 
       res.status(201).json(newCandidate);
     } catch (error) {
+      console.log(error);
       res.status(500).json({ error: "Failed to create new candidate" });
     }
   }
@@ -67,6 +68,7 @@ export class CandidateController {
 
       res.status(200).json(candidates);
     } catch (error) {
+      console.log(error);
       res.status(500).json({ error: 'Failed to fetch the candidates '});
     }
   }
@@ -92,6 +94,7 @@ export class CandidateController {
 
       res.status(200).json(candidate);
     } catch (error) {
+      console.log(error);
       res.status(500).json({ error: 'Failed to fetch the candidates '});
     }
   }
@@ -115,6 +118,7 @@ export class CandidateController {
 
       res.status(200).json({ message: 'Candidate updated', data: updated });
     } catch (error) {
+      console.log(error);
       res.status(500).json({ error: 'Failed to update candidate', details: error });
     }
   }
@@ -128,6 +132,9 @@ export class CandidateController {
       const { id } = req.params;
       const { newStage } = req.body;
 
+      console.log(id);
+      console.log(newStage);
+
       if (!allowedStages.includes(newStage)) {
         return res.status(400).json({ error: 'Invalid stage value' });
       }
@@ -136,6 +143,7 @@ export class CandidateController {
 
       res.status(200).json(updateCandidate);
     } catch (error) {
+      console.log(error);
       res.status(500).json({ error: 'Failed to update stage' });
     }
   }
@@ -157,6 +165,7 @@ export class CandidateController {
 
       res.status(200).json({ message: 'Candidate deleted', data: deleted });
     } catch (error) {
+      console.log(error);
       res.status(500).json({ error: 'Failed to delete candidate', details: error });
     }
   }
